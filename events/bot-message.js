@@ -2,11 +2,11 @@ const ENV = process.env;
 
 /**
  * Event that occurs when the bot receives a message.
- * 
- * @param {Discord.Client} client 
+ *
+ * @param {Discord.Client} client
  */
 function onBotMessage(client) {
-  client.on("message", async message => {
+  return client.on("message", async message => {
     if (
       message.author.bot ||
       message.channel.type === "dm" ||
@@ -21,7 +21,11 @@ function onBotMessage(client) {
 
     const command = messageArgs.shift().toLowerCase();
 
-    client.commands.get(command).execute(message, messageArgs);
+    if (client.commands.get(command)) {
+      client.commands.get(command).execute(message, messageArgs);
+    } else {
+      message.channel.send(message.author + ", this command does not exists.");
+    }
   });
 }
 

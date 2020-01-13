@@ -28,8 +28,6 @@ function startBot(client) {
   // Setup the commands.
   setCommands(client, commandFiles);
 
-  console.log(ENV.TOKEN)
-
   // Log in the bot.
   client.login(ENV.TOKEN);
 
