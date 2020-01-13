@@ -1,3 +1,5 @@
+const ENV = process.env;
+
 /**
  * Event that occurs when the bot receives a message.
  * 
@@ -8,12 +10,12 @@ function onBotMessage(client) {
     if (
       message.author.bot ||
       message.channel.type === "dm" ||
-      !message.content.startsWith(config.prefix)
+      !message.content.startsWith(ENV.PREFIX)
     )
       return;
 
     const messageArgs = message.content
-      .slice(config.prefix.length)
+      .slice(ENV.PREFIX.length)
       .trim()
       .split(/ +/g);
 
